@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import { loginUser } from "@/usecase/loginUser";
 
 const useLogin = () => {
   const [id, setId] = useState<string>("")
@@ -10,18 +11,12 @@ const useLogin = () => {
     e.preventDefault();
     setErrorMessage("");
 
-    try {
-      const res = await fetch("http://localhost:3001/users");
-      const users = await res.json();
-      const confirm = users.find((user : {id: string, pass: string}) => user.id === id && user.pass === pass);
-      if (confirm) {
-        setUserInfo({id: confirm.id, pass: confirm.pass, name: confirm.name});
-      } else {
-        setUserInfo(null);
-        setErrorMessage("IDまたはパスワードが正しくありません。");
-      }
-    } catch (error) {
-      setErrorMessage("エラー");
+    const confirm = await loginUser(id, pass);
+    if (confirm) {
+      setUserInfo(confirm);
+    } else {
+      setUserInfo(null);
+      setErrorMessage("IDまたはパスワードが正しくありません。");
     }
   };
 
