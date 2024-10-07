@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const Signup = () => {
   const [name, setName] = useState<string>("");
@@ -13,9 +13,9 @@ const Signup = () => {
     setErrorMessage("");
 
     const res = await fetch("http://localhost:3011/users");
-    const users = res.json();
+    const users = await res.json();
 
-    if (users.some(user => user.id === id)) {
+    if (users.some((user: any) => user.id === id)) {
       setErrorMessage("このIDはすでに使用されています。");
       return
     }
