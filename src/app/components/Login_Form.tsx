@@ -1,4 +1,4 @@
-import Link from "next/link";
+import useNavigate from "@/hooks/useNavigate";
 import { FormEvent } from "react";
 
 interface LoginFormProps {
@@ -10,6 +10,7 @@ interface LoginFormProps {
 }
 
 const LoginForm = ({id, pass, onChangeId, onChangePass, onSubmitForm}: LoginFormProps) => {
+  const { handleClick } = useNavigate();
   return (
     <form onSubmit={onSubmitForm} className="bg-white shadow-lg rounded-lg p-10 max-w-xs mx-auto mt-12 border border-gray-300">
       <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">LOGIN</h1>
@@ -17,7 +18,7 @@ const LoginForm = ({id, pass, onChangeId, onChangePass, onSubmitForm}: LoginForm
         <input
           type="text"
           name="id"
-          placeholder="id"
+          placeholder="ID"
           value={id}
           onChange={onChangeId}
           className="bg-gray-100 border border-gray-300 text-gray-900 rounded-lg p-4 w-full transition duration-300 ease-in-out transform focus:border-blue-500 focus:ring focus:ring-blue-200 hover:shadow-md"
@@ -27,7 +28,7 @@ const LoginForm = ({id, pass, onChangeId, onChangePass, onSubmitForm}: LoginForm
         <input
           type="text"
           name="pass"
-          placeholder="password"
+          placeholder="PASSWORD"
           value={pass}
           onChange={onChangePass}
           className="bg-gray-100 border border-gray-300 text-gray-900 rounded-lg p-4 w-full transition duration-300 ease-in-out transform focus:border-blue-500 focus:ring focus:ring-blue-200 hover:shadow-md"
@@ -43,12 +44,12 @@ const LoginForm = ({id, pass, onChangeId, onChangePass, onSubmitForm}: LoginForm
         className="text-center mt-4 text-gray-600 text-sm"
       >
         Don't have an account?
-        <Link
-          href="signup"
+        <span
+          onClick={handleClick}
           className="text-blue-500 hover:underline"
         >
           signup
-        </Link>
+        </span>
       </p>
     </form>
   );
