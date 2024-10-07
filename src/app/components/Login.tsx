@@ -15,8 +15,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="bg-gray-100">
-        <h1 className="text-center text-3xl font-bold pt-5 mb-3">LOGIN</h1>
+      <div>
         <LoginForm
           id={id}
           pass={pass}
@@ -26,7 +25,6 @@ const Login = () => {
         />
         {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
       </div>
-
       {userInfo && <UserInfo id={userInfo.id} pass={userInfo.pass} name={userInfo.name} />}
     </>
   );
